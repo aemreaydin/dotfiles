@@ -29,7 +29,6 @@ function M.config()
 	local sources = {
 		-- Lua
 		completion.luasnip,
-		diagnostics.selene,
 		formatting.stylua,
 		-- C/C++
 		diagnostics.cmake_lint,

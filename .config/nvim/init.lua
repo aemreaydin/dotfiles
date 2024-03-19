@@ -9,5 +9,7 @@ spec("user.mason")
 spec("user.none_ls")
 spec("user.nvim_tree")
 spec("user.schemastore")
+spec("user.lspconfig")
+spec("user.cmp")
 
 require("user.lazy")
