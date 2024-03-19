@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -103,3 +103,4 @@ eval "$(zoxide init zsh)"
 export PATH="$HOME/.local/bin:$PATH"
 
 source ~/.alias
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
