@@ -23,15 +23,14 @@ function M.config()
 	end
 
 	local formatting = null_ls.builtins.formatting
-	local completion = null_ls.builtins.completion
 	local diagnostics = null_ls.builtins.diagnostics
+	local completions = null_ls.builtins.completion
 
 	local sources = {
 		-- Lua
-		completion.luasnip,
+		completions.luasnip,
 		formatting.stylua,
 		-- C/C++
-		diagnostics.cmake_lint,
 		formatting.clang_format,
 		formatting.cmake_format,
 		-- GLSL/HLSL

@@ -6,6 +6,9 @@ local M = {
 		"mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 	},
+	opts = {
+		inlay_hints = { enabled = true },
+	},
 }
 
 M.on_attach = function(client, bufnr)
@@ -17,10 +20,7 @@ M.on_attach = function(client, bufnr)
 	keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-
-	if client.supports_method("textDocument/inlayHint") then
-		vim.lsp.inlay_hint.enable(bufnr, true)
-	end
+	keymap(bufnr, "n", "gi", "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", opts)
 end
 
 function M.common_capabilities()
@@ -36,6 +36,25 @@ end
 
 function M.config()
 	local lspconfig = require("lspconfig")
+
+	local wk = require("which-key")
+	wk.register({
+		l = {
+			name = "LSP",
+			["a"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+			["f"] = {
+				"<cmd>lua vim.lsp.buf.format({async = true})<cr>",
+				"Format",
+			},
+			["i"] = { "<cmd>LspInfo<cr>", "Info" },
+			["j"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
+			["h"] = { "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", "Hints" },
+			["k"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
+			["l"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+			["q"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
+			["r"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+		},
+	}, { prefix = "<leader>" })
 
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 	vim.lsp.handlers["textDocument/signatureHelp"] =

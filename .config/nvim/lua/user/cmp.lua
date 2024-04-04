@@ -18,18 +18,18 @@ local M = {
 			"hrsh7th/cmp-cmdline",
 			event = "InsertEnter",
 		},
-		--{
-		--		"saadparwaiz1/cmp_luasnip",
-		--		event = "InsertEnter",
-		--},
-		--{
-		--	"L3MON4D3/LuaSnip",
-		--	event = "InsertEnter",
-		--	dependencies = {
-		--		"rafamadriz/friendly-snippets",
-		--	},
-		--	build = "make install_jsregexp",
-		--},
+		{
+			"saadparwaiz1/cmp_luasnip",
+			event = "InsertEnter",
+		},
+		{
+			"L3MON4D3/LuaSnip",
+			event = "InsertEnter",
+			dependencies = {
+				"rafamadriz/friendly-snippets",
+			},
+			build = "make install_jsregexp",
+		},
 		{
 			"hrsh7th/cmp-nvim-lua",
 		},
@@ -38,7 +38,7 @@ local M = {
 
 function M.config()
 	local cmp = require("cmp")
-	--local luasnip = require("luasnip")
+	local luasnip = require("luasnip")
 	--require("luasnip/loaders/from_vscode").lazy_load()
 
 	vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
@@ -49,11 +49,11 @@ function M.config()
 	--	end
 
 	cmp.setup({
-		--snippet = {
-		--		expand = function(args)
-		--			luasnip.lsp_expand(args.body) -- For `luasnip` users.
-		--		end,
-		--	},
+		snippet = {
+			expand = function(args)
+				luasnip.lsp_expand(args.body)
+			end,
+		},
 		mapping = cmp.mapping.preset.insert({
 			["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
 			["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
@@ -72,10 +72,8 @@ function M.config()
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
-				--		elseif luasnip.expandable() then
-				--			luasnip.expand()
-				--		elseif luasnip.expand_or_jumpable() then
-				--			luasnip.expand_or_jump()
+				elseif luasnip.expand_or_jumpable() then
+					luasnip.expand_or_jump()
 				else
 					fallback()
 				end

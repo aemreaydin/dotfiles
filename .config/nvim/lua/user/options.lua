@@ -1,5 +1,6 @@
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cmdheight = 1
+vim.opt.showmode = false
 vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
@@ -10,7 +11,8 @@ vim.opt.smartindent = true
 vim.opt.splitbelow = true
 vim.opt.swapfile = false
 vim.opt.termguicolors = true
-vim.opt.timeoutlen = 1000
+vim.o.timeout = true
+vim.opt.timeoutlen = 500
 vim.opt.undofile = true
 vim.opt.updatetime = 100
 vim.opt.writebackup = false

@@ -13,6 +13,15 @@ return {
 					spec = "require",
 				},
 			},
+			hint = {
+				enable = true,
+				arrayIndex = "All", -- "Enable" | "Auto" | "Disable"
+				await = true,
+				paramName = "All", -- "All" | "Literal" | "Disable"
+				paramType = true,
+				semicolon = "All", -- "All" | "SameLine" | "Disable"
+				setType = false,
+			},
 			workspace = {
 				checkThirdParty = false,
 				library = {

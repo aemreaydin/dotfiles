@@ -7,7 +7,19 @@ local M = {
 function M.config()
 	local configs = require("nvim-treesitter.configs")
 	configs.setup({
-		ensure_installed = { "c", "cpp", "rust", "lua", "javascript", "typescript", "bash", "glsl", "hlsl", "vimdoc" },
+		ensure_installed = {
+			"c",
+			"cpp",
+			"rust",
+			"lua",
+			"json",
+			"javascript",
+			"typescript",
+			"bash",
+			"glsl",
+			"hlsl",
+			"vimdoc",
+		},
 		highlight = {
 			enable = true,
 		},
