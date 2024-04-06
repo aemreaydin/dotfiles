@@ -11,7 +11,9 @@ function M.config()
 	wk.register({
 		["<leader>e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
 	})
-	require("nvim-tree").setup({})
+	require("nvim-tree").setup({
+		view = { relativenumber = true },
+	})
 end
 
 return M

@@ -4,7 +4,9 @@ local M = {
 
 function M.config()
 	local mappings = {
-		q = { "<cmd>confirm q<CR>", "Quit" },
+		w = { "<cmd>confirm w<CR>", "Save" },
+		q = { "<cmd>bd<CR>", "Unload Buffer" },
+		qa = { "<cmd>confirm q<CR>", "Quit" },
 		v = { "<cmd>vsplit<CR>", "Vertical Split" },
 	}
 
