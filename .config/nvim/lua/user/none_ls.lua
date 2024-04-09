@@ -32,7 +32,6 @@ function M.config()
 		formatting.stylua,
 		-- C/C++
 		formatting.clang_format,
-		formatting.cmake_format,
 		-- GLSL/HLSL
 		diagnostics.glslc,
 	}

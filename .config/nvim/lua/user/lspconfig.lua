@@ -81,7 +81,7 @@ function M.config()
 		end
 
 		if server == "lua_ls" then
-			require("neodev").setup({})
+			require("neodev").setup({ library = { plugins = { "neotest" }, types = true } })
 		end
 		lspconfig[server].setup(opts)
 	end

@@ -14,6 +14,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 		"man",
 		"lspinfo",
 		"oil",
+		"toggleterm",
 		"spectre_panel",
 		"lir",
 		"DressingSelect",
