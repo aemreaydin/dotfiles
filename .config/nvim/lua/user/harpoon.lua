@@ -96,4 +96,15 @@ M.config = function()
 	}, { prefix = "<leader>" })
 end
 
+-- vim.api.nvim_create_autocmd("VimEnter", {
+-- 		local harpoon = require("harpoon")
+-- 	callback = function()
+-- 		local buffers = vim.api.nvim_list_bufs()
+-- 		if #buffers and harpoon:list():get(1) then
+-- 			harpoon:list():select(1)
+-- 		end
+-- 		vim.inspect(harpoon:list())
+-- 	end,
+-- })
+
 return M
