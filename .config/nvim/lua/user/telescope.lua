@@ -127,6 +127,13 @@ M.config = function()
 				override_file_sorter = true,
 				case_mode = "smart_case",
 			},
+			project = {
+				on_project_selected = function(prompt_bufnr)
+					local actions = require("telescope").extensions.project.actions
+					require("telescope._extensions.project.actions").change_working_directory(prompt_bufnr, false)
+					require("harpoon"):list():select(1)
+				end,
+			},
 		},
 	})
 	telescope.load_extension("file_browser")
