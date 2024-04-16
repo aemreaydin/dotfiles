@@ -64,6 +64,7 @@ function M.config()
 	local servers = {
 		"lua_ls",
 		"jsonls",
+		"yamlls",
 		"clangd",
 		"cmake",
 		"taplo",
@@ -81,7 +82,7 @@ function M.config()
 		end
 
 		if server == "lua_ls" then
-			require("neodev").setup({ library = { plugins = { "neotest" }, types = true } })
+			require("neodev").setup({ library = { plugins = { "nvim-dap-ui", "neotest" }, types = true } })
 		end
 		lspconfig[server].setup(opts)
 	end

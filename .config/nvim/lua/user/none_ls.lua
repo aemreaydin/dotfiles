@@ -34,6 +34,8 @@ function M.config()
 		formatting.clang_format,
 		-- GLSL/HLSL
 		diagnostics.glslc,
+		-- YAML
+		formatting.yamlfmt,
 	}
 
 	require("null-ls").setup({

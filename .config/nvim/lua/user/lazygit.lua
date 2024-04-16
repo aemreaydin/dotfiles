@@ -1,5 +1,6 @@
 local M = {
 	"kdheepak/lazygit.nvim",
+	event = "BufReadPost",
 	cmd = {
 		"LazyGit",
 		"LazyGitConfig",
@@ -15,7 +16,7 @@ local M = {
 M.config = function()
 	local wk = require("which-key")
 	wk.register({
-		["gg"] = { "<cmd>LazyGit<CR>", "LazyGit" },
+		g = { "<cmd>LazyGit<CR>", "LazyGit" },
 	}, { prefix = "<leader>" })
 	require("telescope").load_extension("lazygit")
 end

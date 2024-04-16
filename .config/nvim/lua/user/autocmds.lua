@@ -9,6 +9,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 		"netrw",
 		"Jaq",
 		"qf",
+		"dap-float",
 		"git",
 		"help",
 		"man",
@@ -69,9 +70,24 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
 			return
 		end
 		if luasnip.expand_or_jumpable() then
-			-- ask maintainer for option to make this silent
-			-- luasnip.unlink_current()
 			vim.cmd([[silent! lua require("luasnip").unlink_current()]])
 		end
+	end,
+})
+
+local redirect_to_harpoon = function()
+	local utils = require("user.utils")
+	if utils.is_no_name_buf(vim.api.nvim_get_current_buf()) then
+		local item = require("harpoon"):list():get(1)
+
+		local window_id = vim.api.nvim_get_current_win()
+		if item ~= nil and vim.api.nvim_win_get_config(window_id).relative == "" then
+			require("harpoon"):list():select(1)
+		end
+	end
+end
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+	callback = function()
+		vim.defer_fn(redirect_to_harpoon, 50)
 	end,
 })

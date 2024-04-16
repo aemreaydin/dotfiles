@@ -3,7 +3,7 @@ local M = {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
-		{ "nvim-telescope/telescope-project.nvim" },
+		{ "ahmedkhalf/project.nvim" },
 		{ "nvim-telescope/telescope-file-browser.nvim" },
 	},
 }
@@ -18,9 +18,10 @@ M.config = function()
 			s = { "<cmd>Telescope grep_string<CR>", "Find String Under Cursor" },
 			t = { "<cmd>Telescope live_grep<CR>", "Find Text" },
 			b = { "<cmd>Telescope buffers<CR>", "Find Buffer" },
+			l = { "<cmd>Telescope lazygit<CR>", "Find from git files" },
 			o = { "<cmd>Telescope oldfiles<CR>", "Find Previously Opened Files" },
 			h = { "<cmd>Telescope help_tags<CR>", "Find Help Tags" },
-			p = { "<cmd>Telescope project<CR>", "Find Projects" },
+			p = { "<cmd>Telescope projects<CR>", "Find Projects" },
 			B = { "<cmd>Telescope file_browser<CR>", "File Browser" },
 			C = { "<cmd>Telescope commands<CR>", "Find Commands" },
 			H = { "<cmd>Telescope command_history<CR>", "Find From Command History" },
@@ -82,6 +83,8 @@ M.config = function()
 					"--hidden",
 					"-g",
 					"!.git",
+					"-g",
+					"!vcpkg",
 				},
 			},
 			buffers = {
@@ -127,17 +130,11 @@ M.config = function()
 				override_file_sorter = true,
 				case_mode = "smart_case",
 			},
-			project = {
-				on_project_selected = function(prompt_bufnr)
-					local actions = require("telescope").extensions.project.actions
-					require("telescope._extensions.project.actions").change_working_directory(prompt_bufnr, false)
-					require("harpoon"):list():select(1)
-				end,
-			},
 		},
 	})
+	require("project_nvim").setup({})
 	telescope.load_extension("file_browser")
-	telescope.load_extension("project")
+	telescope.load_extension("projects")
 end
 
 return M

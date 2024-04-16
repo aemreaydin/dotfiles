@@ -15,6 +15,8 @@ function M.config()
 		"rust_analyzer",
 		"taplo",
 		"tsserver",
+		"yamlls",
+		"jsonls",
 	}
 
 	require("mason").setup({

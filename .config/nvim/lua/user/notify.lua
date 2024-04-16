@@ -3,7 +3,7 @@ local M = {
 }
 
 M.config = function()
-	require("notify").setup({ top_down = false, render = "minimal" })
+	require("notify").setup({ top_down = false })
 end
 
 return M
