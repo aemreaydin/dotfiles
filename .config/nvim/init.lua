@@ -33,11 +33,13 @@ spec("user.lualine")
 spec("user.neoscroll")
 spec("user.illuminate") -- Highlight word under cursor in file
 -- spec("user.ufo") -- Folding
-spec("user.modicator") -- Match line number color with lualine status color
+-- spec("user.modicator") -- Match line number color with lualine status color
 spec("user.spectre")
 spec("user.dressing")
 spec("user.cmake")
 spec("user.schemastore")
+spec("user.noice")
+-- spec("user.iconpicker")
 -- spec("user.bqf")
 -- spec("user.chatgpt")
 -- spec("user.neotest")
