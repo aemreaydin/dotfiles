@@ -23,6 +23,7 @@ spec("user.dap")
 -- Nice To Haves
 -- spec("user.aerial")
 -- spec("user.twilight")
+-- spec("user.scrolleof")
 spec("user.trouble")
 spec("user.surround")
 spec("user.notify")
