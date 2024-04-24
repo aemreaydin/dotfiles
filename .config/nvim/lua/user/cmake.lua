@@ -14,7 +14,7 @@ M.config = function()
 	}, { prefix = "<leader>" })
 	require("cmake-tools").setup({
 		cmake_build_directory = "build/${variant:buildType}",
-		cmake_executor = { name = "overseer" },
+		cmake_executor = { name = "toggleterm" },
 		cmake_runner = { name = "toggleterm" },
 		cmake_variants_message = {
 			long = { show = false, max_length = 40 },
@@ -26,11 +26,6 @@ M.config = function()
 			stopOnEntry = false,
 			runInTerminal = true,
 			console = "integratedTerminal",
-		},
-		toggleterm = {
-			direction = "float",
-			close_on_exit = false,
-			auto_scroll = true,
 		},
 		cmake_notifications = {
 			runner = { enabled = false },

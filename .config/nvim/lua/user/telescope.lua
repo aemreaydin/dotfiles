@@ -22,6 +22,8 @@ M.config = function()
 			o = { "<cmd>Telescope oldfiles<CR>", "Find Previously Opened Files" },
 			h = { "<cmd>Telescope help_tags<CR>", "Find Help Tags" },
 			p = { "<cmd>Telescope projects<CR>", "Find Projects" },
+			c = { "<cmd>Telescope colorscheme<CR>", "Preview Colorschemes" },
+			n = { "<cmd>Telescope notify<CR>", "Notify Messages" },
 			B = { "<cmd>Telescope file_browser<CR>", "File Browser" },
 			C = { "<cmd>Telescope commands<CR>", "Find Commands" },
 			H = { "<cmd>Telescope command_history<CR>", "Find From Command History" },
@@ -84,7 +86,7 @@ M.config = function()
 					"-g",
 					"!.git",
 					"-g",
-					"!vcpkg",
+					"!vcpkg*",
 				},
 			},
 			buffers = {

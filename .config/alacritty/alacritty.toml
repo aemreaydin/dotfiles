@@ -1,0 +1,26 @@
+import = [
+  # uncomment the flavour you want below:
+  # "~/.config/alacritty/catppuccin-latte.toml"
+  # "~/.config/alacritty/catppuccin-frappe.toml"
+  # "~/.config/alacritty/catppuccin-macchiato.toml"
+  # "~/.config/alacritty/catppuccin-mocha.toml"
+  # "~/.config/alacritty/everforest-dark.toml"
+  # "~/.config/alacritty/everforest-dark-soft.toml"
+  "~/.config/alacritty/everforest-dark-medium.toml"
+  # "~/.config/alacritty/everforest-light.toml"
+]
+
+[font]
+size = 14.0
+
+[font.normal]
+family = "MonoLisa Nerd Font"
+
+[window]
+decorations = "transparent"
+dynamic_padding = true
+startup_mode = "SimpleFullscreen"
+option_as_alt = "OnlyLeft"
+
+[env]
+TERM = "xterm-256color"

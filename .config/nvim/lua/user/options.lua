@@ -11,7 +11,7 @@ vim.opt.smartindent = true
 vim.opt.splitbelow = true
 vim.opt.swapfile = false
 vim.opt.termguicolors = true
-vim.o.timeout = true
+vim.opt.timeout = true
 vim.opt.timeoutlen = 500
 vim.opt.undofile = true
 vim.opt.updatetime = 100
@@ -28,8 +28,8 @@ vim.opt.relativenumber = true
 vim.opt.numberwidth = 2
 vim.opt.wrap = false
 vim.opt.sidescrolloff = 8
+vim.opt.splitright = true
+-- vim.opt.scrolloff = 999
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-
-vim.o.scrolloff = 999

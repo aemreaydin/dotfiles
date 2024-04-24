@@ -6,6 +6,7 @@ local M = {
 M.config = function()
 	require("lualine").setup({
 		options = {
+			theme = "everforest",
 			icons_enabled = true,
 			component_separators = { left = "", right = "" },
 			section_separators = { left = "", right = "" },

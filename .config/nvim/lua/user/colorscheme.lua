@@ -1,14 +1,38 @@
+-- local M = {
+-- 	"catppuccin/nvim",
+-- 	name = "catppuccin",
+-- 	version = false,
+-- 	lazy = false,
+-- 	priority = 1000,
+-- }
+
 local M = {
-	"folke/tokyonight.nvim",
-	dependencies = { { "catppuccin/nvim", name = "catppuccin" } },
+	"neanias/everforest-nvim",
+	version = false,
 	lazy = false,
 	priority = 1000,
-	opts = {},
 }
 
 function M.config()
+	-- vim.o.background = "light"
+	require("everforest").setup({
+		background = "medium",
+		italics = true,
+	})
+	vim.cmd.colorscheme("everforest")
+	-- require("catppuccin").setup({
+	-- 	background = { dark = "frappe" },
+	-- 	styles = {
+	-- 		comments = { "bold" },
+	-- 		keywords = { "bold", "italic" },
+	-- 	},
+	-- 	integrations = {
+	-- 		notify = true,
+	-- 		harpoon = true,
+	-- 		noice = true,
+	-- 	},
+	-- })
 	-- vim.cmd.colorscheme("catppuccin")
-	vim.cmd.colorscheme("tokyonight-night")
 end
 
 return M

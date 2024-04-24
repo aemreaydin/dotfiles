@@ -6,7 +6,7 @@ M.config = function()
 	require("notify").setup({
 		keep = false,
 		stages = "fade",
-		timeout = 1,
+		timeout = 5,
 		render = "compact",
 		max_height = function()
 			return math.floor(vim.o.lines * 0.75)

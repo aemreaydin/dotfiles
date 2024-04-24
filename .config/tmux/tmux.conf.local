@@ -395,6 +395,8 @@ tmux_conf_copy_to_os_clipboard=false
 # set -g default-command /bin/zsh
 set-option -g default-shell /bin/zsh
 setenv EDITOR "nvim"
+bind -n M-h send-keys M-h
+
 
 # -- tpm -----------------------------------------------------------------------
 
