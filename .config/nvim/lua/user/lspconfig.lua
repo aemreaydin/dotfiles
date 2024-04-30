@@ -69,6 +69,9 @@ function M.config()
 		"cmake",
 		"taplo",
 		"rust_analyzer",
+		"tsserver",
+		"eslint",
+		"angularls",
 	}
 	for _, server in pairs(servers) do
 		local opts = {

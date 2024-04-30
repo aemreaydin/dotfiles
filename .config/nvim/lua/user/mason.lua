@@ -17,6 +17,7 @@ function M.config()
 		"tsserver",
 		"yamlls",
 		"jsonls",
+		"angularls",
 	}
 
 	require("mason").setup({

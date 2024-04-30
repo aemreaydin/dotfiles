@@ -36,6 +36,8 @@ function M.config()
 		diagnostics.glslc,
 		-- YAML
 		formatting.yamlfmt,
+		-- JS/TS
+		formatting.prettier,
 	}
 
 	require("null-ls").setup({
