@@ -21,7 +21,11 @@ spec("user.unimpaired")
 spec("user.dap")
 
 -- Nice To Haves
--- spec("user.aerial")
+-- spec("user.flit")
+spec("user.flash")
+-- spec("user.sideways")
+spec("user.todo")
+spec("user.aerial")
 -- spec("user.twilight")
 -- spec("user.scrolleof")
 spec("user.focus")
@@ -39,7 +43,7 @@ spec("user.illuminate") -- Highlight word under cursor in file
 -- spec("user.modicator") -- Match line number color with lualine status color
 spec("user.spectre")
 spec("user.dressing")
-spec("user.cmake")
+-- spec("user.cmake")
 spec("user.schemastore")
 spec("user.noice")
 -- spec("user.iconpicker")

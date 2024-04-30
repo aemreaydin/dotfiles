@@ -13,17 +13,18 @@ M.config = function()
 	wk.register({
 		f = {
 			name = "Find",
+			a = { "<cmd>Telescope aerial<CR>", "Find symbols" },
+			b = { "<cmd>Telescope buffers<CR>", "Find Buffer" },
+			c = { "<cmd>Telescope colorscheme<CR>", "Preview Colorschemes" },
+			d = { "<cmd>TodoTelescope<CR>", "Todo Telescope" },
 			f = { "<cmd>Telescope find_files<CR>", "Find Files" },
 			g = { "<cmd>Telescope git_files<CR>", "Git Files" },
+			h = { "<cmd>Telescope help_tags<CR>", "Find Help Tags" },
+			n = { "<cmd>Telescope notify<CR>", "Notify Messages" },
+			o = { "<cmd>Telescope oldfiles<CR>", "Find Previously Opened Files" },
+			p = { "<cmd>Telescope projects<CR>", "Find Projects" },
 			s = { "<cmd>Telescope grep_string<CR>", "Find String Under Cursor" },
 			t = { "<cmd>Telescope live_grep<CR>", "Find Text" },
-			b = { "<cmd>Telescope buffers<CR>", "Find Buffer" },
-			l = { "<cmd>Telescope lazygit<CR>", "Find from git files" },
-			o = { "<cmd>Telescope oldfiles<CR>", "Find Previously Opened Files" },
-			h = { "<cmd>Telescope help_tags<CR>", "Find Help Tags" },
-			p = { "<cmd>Telescope projects<CR>", "Find Projects" },
-			c = { "<cmd>Telescope colorscheme<CR>", "Preview Colorschemes" },
-			n = { "<cmd>Telescope notify<CR>", "Notify Messages" },
 			B = { "<cmd>Telescope file_browser<CR>", "File Browser" },
 			C = { "<cmd>Telescope commands<CR>", "Find Commands" },
 			H = { "<cmd>Telescope command_history<CR>", "Find From Command History" },
@@ -35,15 +36,6 @@ M.config = function()
 	local actions = require("telescope.actions")
 	telescope.setup({
 		defaults = {
-			vimgrep_arguments = {
-				"rg",
-				"--color=never",
-				"--no-heading",
-				"--with-filename",
-				"--line-number",
-				"--column",
-				"--smart-case",
-			},
 			winblend = 0,
 			layout_config = {
 				horizontal = {
@@ -57,74 +49,150 @@ M.config = function()
 				height = 0.8,
 				preview_cutoff = 120,
 			},
+			file_ignore_patterns = { "node_modules", "vcpkg" },
+			vimgrep_arguments = {
+				"rg",
+				"--color=never",
+				"--no-heading",
+				"--with-filename",
+				"--line-number",
+				"--column",
+				"--smart-case",
+				"--hidden",
+				"--glob=!.git/",
+			},
 			mappings = {
 				i = {
 					["<esc>"] = actions.close,
+					["<C-e>"] = require("telescope.actions.layout").toggle_preview,
 				},
 			},
 		},
 		pickers = {
-			live_grep = {
-				theme = "dropdown",
-				layout_config = {
-					width = 0.75,
-				},
-			},
-			grep_string = {
-				theme = "dropdown",
-				layout_config = {
-					width = 0.75,
-				},
-			},
 			find_files = {
-				theme = "dropdown",
 				previewer = false,
-				find_command = {
-					"rg",
-					"--files",
-					"--hidden",
-					"-g",
-					"!.git",
-					"-g",
-					"!vcpkg*",
+				layout_config = {
+					height = 0.4,
+					prompt_position = "top",
+					preview_cutoff = 120,
+				},
+			},
+			git_files = {
+				previewer = false,
+				layout_config = {
+					height = 0.4,
+					prompt_position = "top",
+					preview_cutoff = 120,
 				},
 			},
 			buffers = {
-				theme = "dropdown",
-				previewer = false,
 				mappings = {
 					i = {
-						["<C-d>"] = actions.delete_buffer,
+						["<c-d>"] = actions.delete_buffer,
 					},
 					n = {
-						["dd"] = actions.delete_buffer,
+						["<c-d>"] = actions.delete_buffer,
 					},
 				},
+				previewer = false,
+				initial_mode = "normal",
+				-- theme = "dropdown",
+				layout_config = {
+					height = 0.4,
+					width = 0.6,
+					prompt_position = "top",
+					preview_cutoff = 120,
+				},
 			},
-			planets = {
-				show_pluto = true,
-				show_moon = true,
+			current_buffer_fuzzy_find = {
+				previewer = true,
+				layout_config = {
+					prompt_position = "top",
+					preview_cutoff = 120,
+				},
+			},
+			live_grep = {
+				only_sort_text = true,
+				previewer = true,
+			},
+			grep_string = {
+				only_sort_text = true,
+				previewer = true,
+			},
+			lsp_references = {
+				show_line = false,
+				previewer = true,
+			},
+			treesitter = {
+				show_line = false,
+				previewer = true,
 			},
 			colorscheme = {
 				enable_preview = true,
 			},
-			lsp_references = {
-				theme = "dropdown",
-				initial_mode = "normal",
-			},
-			lsp_definitions = {
-				theme = "dropdown",
-				initial_mode = "normal",
-			},
-			lsp_declarations = {
-				theme = "dropdown",
-				initial_mode = "normal",
-			},
-			lsp_implementations = {
-				theme = "dropdown",
-				initial_mode = "normal",
-			},
 		},
+		-- pickers = {
+		-- 	live_grep = {
+		-- 		theme = "dropdown",
+		-- 		layout_config = {
+		-- 			width = 0.75,
+		-- 		},
+		-- 	},
+		-- 	grep_string = {
+		-- 		theme = "dropdown",
+		-- 		layout_config = {
+		-- 			width = 0.75,
+		-- 		},
+		-- 	},
+		-- 	find_files = {
+		-- 		theme = "dropdown",
+		-- 		previewer = false,
+		-- 		find_command = {
+		-- 			"rg",
+		-- 			"--files",
+		-- 			"--hidden",
+		-- 			"-g",
+		-- 			"!.git",
+		-- 			"-g",
+		-- 			"!vcpkg*",
+		-- 		},
+		-- 	},
+		-- 	buffers = {
+		-- 		theme = "dropdown",
+		-- 		previewer = false,
+		-- 		mappings = {
+		-- 			i = {
+		-- 				["<C-d>"] = actions.delete_buffer,
+		-- 			},
+		-- 			n = {
+		-- 				["dd"] = actions.delete_buffer,
+		-- 			},
+		-- 		},
+		-- 	},
+		-- 	planets = {
+		-- 		show_pluto = true,
+		-- 		show_moon = true,
+		-- 	},
+		-- 	colorscheme = {
+		-- 		enable_preview = true,
+		-- 	},
+		-- 	lsp_references = {
+		-- 		theme = "dropdown",
+		-- 		initial_mode = "normal",
+		-- 	},
+		-- 	lsp_definitions = {
+		-- 		theme = "dropdown",
+		-- 		initial_mode = "normal",
+		-- 	},
+		-- 	lsp_declarations = {
+		-- 		theme = "dropdown",
+		-- 		initial_mode = "normal",
+		-- 	},
+		-- 	lsp_implementations = {
+		-- 		theme = "dropdown",
+		-- 		initial_mode = "normal",
+		-- 	},
+		-- },
 		extensions = {
 			fzf = {
 				fuzzy = true,
@@ -137,6 +205,8 @@ M.config = function()
 	require("project_nvim").setup({})
 	telescope.load_extension("file_browser")
 	telescope.load_extension("projects")
+	telescope.load_extension("aerial")
+	telescope.load_extension("lazygit")
 end
 
 return M

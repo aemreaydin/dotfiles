@@ -7,43 +7,134 @@ M.config = function()
 	local dap = require("dap")
 	local dapui = require("dapui")
 	local wk = require("which-key")
+
+	local function get_args(config)
+		local args = type(config.args) == "function" and (config.args() or {}) or config.args or {}
+		config = vim.deepcopy(config)
+		---@cast args string[]
+		config.args = function()
+			local new_args = vim.fn.input("Run with args: ", table.concat(args, " ")) --[[@as string]]
+			return vim.split(vim.fn.expand(new_args) --[[@as string]], " ")
+		end
+		return config
+	end
 	wk.register({
-		d = {
-			name = "Dap",
-			t = {
-				function()
-					dapui.toggle()
-				end,
-				"Toggle UI",
-			},
-			b = { "<cmd>DapToggleBreakpoint<cr>", "Toggle Breakpoint" },
-			c = { "<cmd>DapContinue<cr>", "Continue" },
-			s = { "<cmd>DapStepOver<cr>", "Step Over" },
-			i = { "<cmd>DapStepInto<cr>", "Step Into" },
-			o = { "<cmd>DapStepOut<cr>", "Step Out" },
-			r = {
-				function()
-					dapui.open({ reset = true })
-				end,
-				"Reset UI",
-			},
-			C = {
-				function()
-					dap.clear_breakpoints()
-					require("notify")("Breakpoints cleared", "warn")
-				end,
-				"Clear All Breakpoints",
-			},
-			T = {
-				function()
-					dapui.toggle({})
-					dap.terminate()
-					require("notify")("Debugger session ended", "warn")
-				end,
-				"Terminate Debugger",
-			},
+		["<leader>du"] = {
+			function()
+				require("dapui").toggle({})
+			end,
+			"Dap UI",
 		},
-	}, { prefix = "<leader>" })
+		["<leader>de"] = {
+			function()
+				require("dapui").eval()
+			end,
+			"Eval",
+			mode = { "n", "v" },
+		},
+		["<leader>dB"] = {
+			function()
+				require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+			end,
+			"Breakpoint Condition",
+		},
+		["<leader>db"] = {
+			function()
+				require("dap").toggle_breakpoint()
+			end,
+			"Toggle Breakpoint",
+		},
+		["<leader>dc"] = {
+			function()
+				require("dap").continue()
+			end,
+			"Continue",
+		},
+		["<leader>da"] = {
+			function()
+				require("dap").continue({ before = get_args })
+			end,
+			"Run with Args",
+		},
+		["<leader>dC"] = {
+			function()
+				require("dap").run_to_cursor()
+			end,
+			"Run to Cursor",
+		},
+		["<leader>dg"] = {
+			function()
+				require("dap").goto_()
+			end,
+			"Go to Line (No Execute)",
+		},
+		["<leader>di"] = {
+			function()
+				require("dap").step_into()
+			end,
+			"Step Into",
+		},
+		["<leader>dj"] = {
+			function()
+				require("dap").down()
+			end,
+			"Down",
+		},
+		["<leader>dk"] = {
+			function()
+				require("dap").up()
+			end,
+			"Up",
+		},
+		["<leader>dl"] = {
+			function()
+				require("dap").run_last()
+			end,
+			"Run Last",
+		},
+		["<leader>do"] = {
+			function()
+				require("dap").step_out()
+			end,
+			"Step Out",
+		},
+		["<leader>dO"] = {
+			function()
+				require("dap").step_over()
+			end,
+			"Step Over",
+		},
+		["<leader>dp"] = {
+			function()
+				require("dap").pause()
+			end,
+			"Pause",
+		},
+		["<leader>dr"] = {
+			function()
+				require("dap").repl.toggle()
+			end,
+			"Toggle REPL",
+		},
+		["<leader>ds"] = {
+			function()
+				require("dap").session()
+			end,
+			"Session",
+		},
+		["<leader>dt"] = {
+			function()
+				require("dap").terminate()
+			end,
+			"Terminate",
+		},
+		["<leader>dw"] = {
+			function()
+				require("dap.ui.widgets").hover()
+			end,
+			"Widgets",
+		},
+	})
 	local pickers = require("telescope.pickers")
 	local finders = require("telescope.finders")
 	local conf = require("telescope.config").values
@@ -99,28 +190,6 @@ M.config = function()
 	end
 	dap.listeners.before.event_exited.dapui_config = function()
 		dapui.close()
-	end
-
-	local api = vim.api
-	local keymap_restore = {}
-	dap.listeners.after["event_initialized"]["me"] = function()
-		for _, buf in pairs(api.nvim_list_bufs()) do
-			local keymaps = api.nvim_buf_get_keymap(buf, "n")
-			for _, keymap in pairs(keymaps) do
-				if keymap.lhs == "K" then
-					table.insert(keymap_restore, keymap)
-					api.nvim_buf_del_keymap(buf, "n", "K")
-				end
-			end
-		end
-		api.nvim_set_keymap("n", "K", '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
-	end
-
-	dap.listeners.after["event_terminated"]["me"] = function()
-		for _, keymap in pairs(keymap_restore) do
-			api.nvim_buf_set_keymap(keymap.buffer, keymap.mode, keymap.lhs, keymap.rhs, { silent = keymap.silent == 1 })
-		end
-		keymap_restore = {}
 	end
 end
 

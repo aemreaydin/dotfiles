@@ -18,7 +18,6 @@ M.config = function()
 	wk.register({
 		g = { "<cmd>LazyGit<CR>", "LazyGit" },
 	}, { prefix = "<leader>" })
-	require("telescope").load_extension("lazygit")
 end
 
 return M

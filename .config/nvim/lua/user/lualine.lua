@@ -1,6 +1,6 @@
 local M = {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = { "nvim-tree/nvim-web-devicons", "meuter/lualine-so-fancy.nvim" },
 }
 
 M.config = function()
@@ -8,8 +8,8 @@ M.config = function()
 		options = {
 			theme = "everforest",
 			icons_enabled = true,
-			component_separators = { left = "", right = "" },
-			section_separators = { left = "", right = "" },
+			-- component_separators = { left = "|", right = "|" },
+			-- section_separators = { left = "", right = "" },
 			disabled_filetypes = {
 				statusline = {},
 				winbar = {},
@@ -24,9 +24,27 @@ M.config = function()
 			},
 		},
 		sections = {
-			lualine_a = { "mode" },
-			lualine_b = { "branch", "diff", "diagnostics" },
-			lualine_c = { { "filename", path = 3 } },
+			lualine_a = {},
+			lualine_b = {
+				"fancy_branch",
+			},
+			lualine_c = {
+				{
+					"filename",
+					path = 1,
+					symbols = {
+						modified = "  ",
+					},
+				},
+				"fancy_diff",
+				{
+					"fancy_diagnostics",
+					sources = { "nvim_lsp" },
+					symbols = { error = " ", warn = " ", info = " " },
+				},
+				{ "fancy_searchcount" },
+				"aerial",
+			},
 			lualine_x = {
 				{
 					require("noice").api.statusline.mode.get,
@@ -34,11 +52,12 @@ M.config = function()
 					color = { fg = "#ff9e64" },
 				},
 				"encoding",
+				"progress",
 				"fileformat",
 				"filetype",
 			},
-			lualine_y = { "progress" },
-			lualine_z = { "location" },
+			lualine_y = {},
+			lualine_z = {},
 		},
 		inactive_sections = {
 			lualine_a = {},

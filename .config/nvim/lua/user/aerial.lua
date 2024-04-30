@@ -8,10 +8,10 @@ local M = {
 
 M.config = function()
 	local wk = require("which-key")
-	wk.register({ a = { "<cmd>AerialToggle<CR>", "Aerial Toggle" } }, { prefix = "<leader>" })
+	wk.register({ ["aa"] = { "<cmd>AerialToggle<CR>", "Aerial Toggle" } }, { prefix = "<leader>" })
 	require("aerial").setup({
 		layout = {
-			min_width = 0.25,
+			min_width = 0.2,
 		},
 		on_attach = function(bufnr)
 			vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })

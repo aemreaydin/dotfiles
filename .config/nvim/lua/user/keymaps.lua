@@ -13,6 +13,8 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "kj", "<ESC>", opts)
 
+keymap("n", "YY", "<cmd>%y<CR>", opts)
+
 keymap("n", "n", "nzz", opts)
 keymap("n", "N", "Nzz", opts)
 keymap("n", "*", "*zz", opts)

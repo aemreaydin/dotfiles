@@ -91,3 +91,33 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 		vim.defer_fn(redirect_to_harpoon, 50)
 	end,
 })
+
+-- Focus ignore types
+local ignore_filetypes_focus = { "Aerial", "neo-tree" }
+local ignore_buftypes_focus = { "nofile", "prompt", "popup" }
+
+local augroup = vim.api.nvim_create_augroup("FocusDisable", { clear = true })
+
+vim.api.nvim_create_autocmd("WinEnter", {
+	group = augroup,
+	callback = function(_)
+		if vim.tbl_contains(ignore_buftypes_focus, vim.bo.buftype) then
+			vim.w.focus_disable = true
+		else
+			vim.w.focus_disable = false
+		end
+	end,
+	desc = "Disable focus autoresize for BufType",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup,
+	callback = function(_)
+		if vim.tbl_contains(ignore_filetypes_focus, vim.bo.filetype) then
+			vim.b.focus_disable = true
+		else
+			vim.b.focus_disable = false
+		end
+	end,
+	desc = "Disable focus autoresize for FileType",
+})
