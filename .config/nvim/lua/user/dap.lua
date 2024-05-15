@@ -1,6 +1,6 @@
 local M = {
 	"rcarriga/nvim-dap-ui",
-	dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+	dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio", "theHamsta/nvim-dap-virtual-text" },
 }
 
 M.config = function()
@@ -20,118 +20,84 @@ M.config = function()
 	end
 	wk.register({
 		["<leader>du"] = {
-			function()
-				require("dapui").toggle({})
-			end,
+			function() dapui.toggle({}) end,
 			"Dap UI",
 		},
 		["<leader>de"] = {
-			function()
-				require("dapui").eval()
-			end,
+			function() dapui.eval() end,
 			"Eval",
 			mode = { "n", "v" },
 		},
 		["<leader>dB"] = {
-			function()
-				require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-			end,
+			function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end,
 			"Breakpoint Condition",
 		},
 		["<leader>db"] = {
-			function()
-				require("dap").toggle_breakpoint()
-			end,
+			function() dap.toggle_breakpoint() end,
 			"Toggle Breakpoint",
 		},
 		["<leader>dc"] = {
-			function()
-				require("dap").continue()
-			end,
+			function() dap.continue() end,
 			"Continue",
 		},
 		["<leader>da"] = {
-			function()
-				require("dap").continue({ before = get_args })
-			end,
+			function() dap.continue({ before = get_args }) end,
 			"Run with Args",
 		},
 		["<leader>dC"] = {
-			function()
-				require("dap").run_to_cursor()
-			end,
+			function() dap.run_to_cursor() end,
 			"Run to Cursor",
 		},
 		["<leader>dg"] = {
-			function()
-				require("dap").goto_()
-			end,
+			function() dap.goto_() end,
 			"Go to Line (No Execute)",
 		},
 		["<leader>di"] = {
-			function()
-				require("dap").step_into()
-			end,
+			function() dap.step_into() end,
 			"Step Into",
 		},
 		["<leader>dj"] = {
-			function()
-				require("dap").down()
-			end,
+			function() dap.down() end,
 			"Down",
 		},
 		["<leader>dk"] = {
-			function()
-				require("dap").up()
-			end,
+			function() dap.up() end,
 			"Up",
 		},
 		["<leader>dl"] = {
-			function()
-				require("dap").run_last()
-			end,
+			function() dap.run_last() end,
 			"Run Last",
 		},
 		["<leader>do"] = {
-			function()
-				require("dap").step_out()
-			end,
+			function() dap.step_out() end,
 			"Step Out",
 		},
 		["<leader>dO"] = {
-			function()
-				require("dap").step_over()
-			end,
+			function() dap.step_over() end,
 			"Step Over",
 		},
 		["<leader>dp"] = {
-			function()
-				require("dap").pause()
-			end,
+			function() dap.pause() end,
 			"Pause",
 		},
 		["<leader>dr"] = {
-			function()
-				require("dap").repl.toggle()
-			end,
+			function() dap.repl.toggle() end,
 			"Toggle REPL",
 		},
+		["<leader>dR"] = {
+			function() dap.clear_breakpoints() end,
+			"Clear All Breakpoints",
+		},
 		["<leader>ds"] = {
-			function()
-				require("dap").session()
-			end,
+			function() dap.session() end,
 			"Session",
 		},
 		["<leader>dt"] = {
-			function()
-				require("dap").terminate()
-			end,
+			function() dap.terminate() end,
 			"Terminate",
 		},
 		["<leader>dw"] = {
-			function()
-				require("dap.ui.widgets").hover()
-			end,
+			function() require("dap.ui.widgets").hover() end,
 			"Widgets",
 		},
 	})
@@ -143,7 +109,7 @@ M.config = function()
 	dap.adapters = {
 		lldb = {
 			type = "executable",
-			command = "lldb-vscode",
+			command = "lldb-dap",
 			name = "lldb",
 		},
 	}
@@ -159,7 +125,10 @@ M.config = function()
 						pickers
 							.new(opts, {
 								prompt_title = "Path to executable",
-								finder = finders.new_oneshot_job({ "fd", "--no-ignore", "--type", "x" }, {}),
+								finder = finders.new_oneshot_job(
+									{ "fd", "--no-ignore", "--type", "x", "--exclude", "CMakeFiles" },
+									{}
+								),
 								sorter = conf.generic_sorter(opts),
 								attach_mappings = function(buffer_number)
 									actions.select_default:replace(function()
@@ -179,18 +148,11 @@ M.config = function()
 		},
 	}
 	dapui.setup({})
-	dap.listeners.before.attach.dapui_config = function()
-		dapui.open()
-	end
-	dap.listeners.before.launch.dapui_config = function()
-		dapui.open()
-	end
-	dap.listeners.before.event_terminated.dapui_config = function()
-		dapui.close()
-	end
-	dap.listeners.before.event_exited.dapui_config = function()
-		dapui.close()
-	end
+	dap.listeners.before.attach.dapui_config = function() dapui.open() end
+	dap.listeners.before.launch.dapui_config = function() dapui.open() end
+	dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
+	dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
+	require("nvim-dap-virtual-text").setup()
 end
 
 return M

@@ -3,11 +3,12 @@ local M = {
 }
 
 function M.config()
+	local buffer_utils = require("user.utils.buffer")
 	local mappings = {
 		w = { "<cmd>confirm w<CR>", "Save" },
-		q = { "<cmd>bd<CR>", "Unload Buffer" },
+		q = { function() buffer_utils.delete_buffer_and_window_if_last() end, "Close Buffer" },
 		qa = { "<cmd>confirm q<CR>", "Quit" },
-		v = { "<cmd>vsplit<CR>", "Vertical Split" },
+		v = { function() buffer_utils.prev_on_original_buffer_on_split() end, "Vertical Split" },
 	}
 
 	local which_key = require("which-key")

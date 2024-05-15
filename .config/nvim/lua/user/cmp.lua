@@ -33,12 +33,15 @@ local M = {
 		{
 			"hrsh7th/cmp-nvim-lua",
 		},
+		"onsails/lspkind.nvim",
 	},
 }
 
 function M.config()
 	local cmp = require("cmp")
 	local luasnip = require("luasnip")
+	local lspkind = require("lspkind")
+
 	--require("luasnip/loaders/from_vscode").lazy_load()
 
 	vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
@@ -50,9 +53,7 @@ function M.config()
 
 	cmp.setup({
 		snippet = {
-			expand = function(args)
-				luasnip.lsp_expand(args.body)
-			end,
+			expand = function(args) luasnip.lsp_expand(args.body) end,
 		},
 		mapping = cmp.mapping.preset.insert({
 			["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
@@ -102,9 +103,7 @@ function M.config()
 			{
 				name = "buffer",
 				option = {
-					get_bufnrs = function()
-						return vim.api.nvim_list_bufs()
-					end,
+					get_bufnrs = function() return vim.api.nvim_list_bufs() end,
 				},
 			},
 			{ name = "path" },
@@ -124,6 +123,15 @@ function M.config()
 		},
 		experimental = {
 			ghost_text = true,
+		},
+		formatting = {
+			format = lspkind.cmp_format({
+				mode = "symbol_text",
+				-- preset = "default",
+				maxwidth = 50,
+				ellipsis_char = "...",
+				show_labelDetails = true,
+			}),
 		},
 	})
 end

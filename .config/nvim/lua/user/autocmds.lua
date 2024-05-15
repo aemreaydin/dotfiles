@@ -1,7 +1,5 @@
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-	callback = function()
-		vim.cmd.set("formatoptions-=cro")
-	end,
+	callback = function() vim.cmd.set("formatoptions-=cro") end,
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -20,6 +18,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 		"lir",
 		"DressingSelect",
 		"tsplayground",
+		"chatgpt-input",
 		"",
 	},
 	callback = function()
@@ -31,28 +30,20 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
-	callback = function()
-		vim.cmd("quit")
-	end,
+	callback = function() vim.cmd("quit") end,
 })
 
 vim.api.nvim_create_autocmd({ "VimResized" }, {
-	callback = function()
-		vim.cmd("tabdo wincmd =")
-	end,
+	callback = function() vim.cmd("tabdo wincmd =") end,
 })
 
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	pattern = { "*" },
-	callback = function()
-		vim.cmd("checktime")
-	end,
+	callback = function() vim.cmd("checktime") end,
 })
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-	callback = function()
-		vim.highlight.on_yank({ higroup = "Visual", timeout = 100 })
-	end,
+	callback = function() vim.highlight.on_yank({ higroup = "Visual", timeout = 100 }) end,
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -77,19 +68,20 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
 
 local redirect_to_harpoon = function()
 	local utils = require("user.utils")
-	if utils.is_no_name_buf(vim.api.nvim_get_current_buf()) then
+	local current_buf = vim.api.nvim_get_current_buf()
+	if utils.is_no_name_buf(current_buf) then
 		local item = require("harpoon"):list():get(1)
 
 		local window_id = vim.api.nvim_get_current_win()
 		if item ~= nil and vim.api.nvim_win_get_config(window_id).relative == "" then
 			require("harpoon"):list():select(1)
+			-- Delete the no name buffer
+			vim.api.nvim_buf_delete(current_buf, { force = true })
 		end
 	end
 end
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
-	callback = function()
-		vim.defer_fn(redirect_to_harpoon, 50)
-	end,
+	callback = function() vim.defer_fn(redirect_to_harpoon, 50) end,
 })
 
 -- Focus ignore types

@@ -42,7 +42,6 @@ M.config = function()
 					sources = { "nvim_lsp" },
 					symbols = { error = " ", warn = " ", info = " " },
 				},
-				{ "fancy_searchcount" },
 				"aerial",
 			},
 			lualine_x = {

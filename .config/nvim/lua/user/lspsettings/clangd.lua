@@ -1,6 +1,13 @@
 return {
 	filetypes = { "h", "hpp", "c", "cpp", "cc", "objc", "objcpp" },
-	cmd = { "clangd", "--offset-encoding=utf-16", "--background-index" },
+	cmd = {
+		"clangd",
+		"--offset-encoding=utf-16",
+		"--background-index",
+		"--completion-style=bundled",
+		"--header-insertion=iwyu",
+		"--suggest-missing-includes",
+	},
 	single_file_support = true,
 	root_dir = require("lspconfig").util.root_pattern(
 		".clangd",

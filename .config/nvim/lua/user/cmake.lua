@@ -21,7 +21,7 @@ M.config = function()
 		},
 		cmake_dap_configuration = {
 			name = "cpp",
-			type = "lldb-vscode",
+			type = "lldb-dap",
 			request = "launch",
 			stopOnEntry = false,
 			runInTerminal = true,

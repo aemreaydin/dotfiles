@@ -5,6 +5,7 @@ local M = {
 		{ "folke/neodev.nvim", opts = {} },
 		"mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
+		"p00f/clangd_extensions.nvim",
 	},
 	opts = {
 		inlay_hints = { enabled = true },
@@ -42,6 +43,7 @@ function M.config()
 		l = {
 			name = "LSP",
 			["a"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+			["s"] = { "<cmd>ClangdSwitchSourceHeader<CR>", "Switch Between Source and Header" },
 			["f"] = {
 				"<cmd>lua vim.lsp.buf.format({async = true})<cr>",
 				"Format",
@@ -72,6 +74,8 @@ function M.config()
 		"tsserver",
 		"eslint",
 		"angularls",
+		"bashls",
+		"shfmt",
 	}
 	for _, server in pairs(servers) do
 		local opts = {

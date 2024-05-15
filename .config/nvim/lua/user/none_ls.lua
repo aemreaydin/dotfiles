@@ -38,6 +38,8 @@ function M.config()
 		formatting.yamlfmt,
 		-- JS/TS
 		formatting.prettier,
+		-- Bash
+		formatting.shfmt,
 	}
 
 	require("null-ls").setup({

@@ -76,6 +76,15 @@ M.config = function()
 					prompt_position = "top",
 					preview_cutoff = 120,
 				},
+				find_command = {
+					"rg",
+					"--files",
+					"--hidden",
+					"-g",
+					"!.git",
+					"-g",
+					"!vcpkg*",
+				},
 			},
 			git_files = {
 				previewer = false,
