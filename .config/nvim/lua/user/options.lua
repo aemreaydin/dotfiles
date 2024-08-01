@@ -1,12 +1,13 @@
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.inccommand = "split"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cmdheight = 1
 vim.opt.showmode = false
 vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.hlsearch = true
-vim.opt.ignorecase = true
 vim.opt.pumheight = 10
 vim.opt.pumblend = 10
-vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.splitbelow = true
 vim.opt.swapfile = false

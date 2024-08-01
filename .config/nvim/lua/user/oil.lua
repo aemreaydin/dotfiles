@@ -1,10 +1,11 @@
 local M = {
 	"stevearc/oil.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = { "echasnovski/mini.icons" },
 }
 
 function M.config()
 	require("oil").setup({
+		skip_confirm_for_simple_edits = true,
 		float = {
 			max_height = 20,
 			max_width = 60,

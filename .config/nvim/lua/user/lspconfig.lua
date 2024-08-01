@@ -21,7 +21,7 @@ M.on_attach = function(_, bufnr)
 	keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-	keymap(bufnr, "n", "gi", "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", opts)
+	-- keymap(bufnr, "n", "gi", "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", opts)
 end
 
 function M.common_capabilities()
@@ -30,10 +30,10 @@ function M.common_capabilities()
 	return capabilities
 end
 
-M.toggle_inlay_hints = function()
-	local bufnr = vim.api.nvim_get_current_buf()
-	vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
-end
+-- M.toggle_inlay_hints = function()
+-- 	local bufnr = vim.api.nvim_get_current_buf()
+-- 	vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
+-- end
 
 function M.config()
 	local lspconfig = require("lspconfig")
@@ -50,7 +50,7 @@ function M.config()
 			},
 			["i"] = { "<cmd>LspInfo<cr>", "Info" },
 			["j"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
-			["h"] = { "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", "Hints" },
+			-- ["h"] = { "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", "Hints" },
 			["k"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
 			["l"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
 			["q"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
@@ -75,7 +75,6 @@ function M.config()
 		"eslint",
 		"angularls",
 		"bashls",
-		"shfmt",
 	}
 	for _, server in pairs(servers) do
 		local opts = {

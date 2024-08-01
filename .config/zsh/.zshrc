@@ -1,6 +1,6 @@
 ZSH_PATH="$HOME/.config/zsh"
 
-export PATH="/opt/homebrew/bin:/opt/homebrew/opt/llvm/bin:$PATH"
+export PATH="/opt/homebrew/bin:/opt/homebrew/opt/llvm/bin:$HOME/go/bin:$PATH"
 
 if type nvim > /dev/null 2>&1; then
     alias vim="nvim"

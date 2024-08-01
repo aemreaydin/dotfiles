@@ -3,7 +3,6 @@ local M = {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
-		{ "ahmedkhalf/project.nvim" },
 		{ "nvim-telescope/telescope-file-browser.nvim" },
 	},
 }
@@ -13,16 +12,15 @@ M.config = function()
 	wk.register({
 		f = {
 			name = "Find",
-			a = { "<cmd>Telescope aerial<CR>", "Find symbols" },
+			-- a = { "<cmd>Telescope aerial<CR>", "Find symbols" },
 			b = { "<cmd>Telescope buffers<CR>", "Find Buffer" },
 			c = { "<cmd>Telescope colorscheme<CR>", "Preview Colorschemes" },
 			d = { "<cmd>TodoTelescope<CR>", "Todo Telescope" },
 			f = { "<cmd>Telescope find_files<CR>", "Find Files" },
 			g = { "<cmd>Telescope git_files<CR>", "Git Files" },
 			h = { "<cmd>Telescope help_tags<CR>", "Find Help Tags" },
-			n = { "<cmd>Telescope notify<CR>", "Notify Messages" },
+			-- n = { "<cmd>Telescope notify<CR>", "Notify Messages" },
 			o = { "<cmd>Telescope oldfiles<CR>", "Find Previously Opened Files" },
-			p = { "<cmd>Telescope projects<CR>", "Find Projects" },
 			s = { "<cmd>Telescope grep_string<CR>", "Find String Under Cursor" },
 			t = { "<cmd>Telescope live_grep<CR>", "Find Text" },
 			B = { "<cmd>Telescope file_browser<CR>", "File Browser" },
@@ -211,10 +209,8 @@ M.config = function()
 			},
 		},
 	})
-	require("project_nvim").setup({})
 	telescope.load_extension("file_browser")
-	telescope.load_extension("projects")
-	telescope.load_extension("aerial")
+	-- telescope.load_extension("aerial")
 	telescope.load_extension("lazygit")
 end
 

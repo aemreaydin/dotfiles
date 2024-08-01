@@ -11,6 +11,7 @@ function M.config()
 		ensure_installed = {
 			"c",
 			"cpp",
+			"go",
 			"rust",
 			"lua",
 			"json",

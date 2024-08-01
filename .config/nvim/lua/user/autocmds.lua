@@ -66,23 +66,31 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
 	end,
 })
 
-local redirect_to_harpoon = function()
-	local utils = require("user.utils")
-	local current_buf = vim.api.nvim_get_current_buf()
-	if utils.is_no_name_buf(current_buf) then
-		local item = require("harpoon"):list():get(1)
-
-		local window_id = vim.api.nvim_get_current_win()
-		if item ~= nil and vim.api.nvim_win_get_config(window_id).relative == "" then
-			require("harpoon"):list():select(1)
-			-- Delete the no name buffer
-			vim.api.nvim_buf_delete(current_buf, { force = true })
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		if vim.fn.argv(0) == "" then
+			require("telescope.builtin").git_files()
 		end
-	end
-end
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-	callback = function() vim.defer_fn(redirect_to_harpoon, 50) end,
+	end,
 })
+
+-- local redirect_to_harpoon = function()
+-- 	local utils = require("user.utils")
+-- 	local current_buf = vim.api.nvim_get_current_buf()
+-- 	if utils.is_no_name_buf(current_buf) then
+-- 		local item = require("harpoon"):list():get(1)
+--
+-- 		local window_id = vim.api.nvim_get_current_win()
+-- 		if item ~= nil and vim.api.nvim_win_get_config(window_id).relative == "" then
+-- 			require("harpoon"):list():select(1)
+-- 			-- Delete the no name buffer
+-- 			vim.api.nvim_buf_delete(current_buf, { force = true })
+-- 		end
+-- 	end
+-- end
+-- vim.api.nvim_create_autocmd({ "VimEnter" }, {
+-- 	callback = function() vim.defer_fn(redirect_to_harpoon, 50) end,
+-- })
 
 -- Focus ignore types
 local ignore_filetypes_focus = { "Aerial", "neo-tree" }

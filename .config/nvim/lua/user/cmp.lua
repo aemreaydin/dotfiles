@@ -96,10 +96,7 @@ function M.config()
 			}),
 		}),
 		sources = {
-			{ name = "copilot" },
 			{ name = "nvim_lsp" },
-			{ name = "nvim_lua" },
-			--			{ name = "luasnip" },
 			{
 				name = "buffer",
 				option = {
@@ -107,6 +104,8 @@ function M.config()
 				},
 			},
 			{ name = "path" },
+			{ name = "luasnip" },
+			{ name = "nvim_lua" },
 		},
 		confirm_opts = {
 			behavior = cmp.ConfirmBehavior.Replace,

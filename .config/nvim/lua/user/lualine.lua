@@ -6,7 +6,7 @@ local M = {
 M.config = function()
 	require("lualine").setup({
 		options = {
-			theme = "everforest",
+			theme = require("neofusion.lualine"),
 			icons_enabled = true,
 			-- component_separators = { left = "|", right = "|" },
 			-- section_separators = { left = "", right = "" },
@@ -42,18 +42,13 @@ M.config = function()
 					sources = { "nvim_lsp" },
 					symbols = { error = " ", warn = " ", info = " " },
 				},
-				"aerial",
 			},
 			lualine_x = {
-				{
-					require("noice").api.statusline.mode.get,
-					cond = require("noice").api.statusline.mode.has,
-					color = { fg = "#ff9e64" },
-				},
+				{ "fancy_macro" },
+				{ "fancy_filetype" },
 				"encoding",
 				"progress",
 				"fileformat",
-				"filetype",
 			},
 			lualine_y = {},
 			lualine_z = {},
