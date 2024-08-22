@@ -1,7 +1,0 @@
-{
-    "diagnostics.globals": [
-        "vim",
-        "spec",
-        "is_no_name_buf"
-    ]
-}

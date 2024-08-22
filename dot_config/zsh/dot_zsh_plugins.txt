@@ -1,9 +1,0 @@
-rupa/z
-zsh-users/zsh-completions
-zsh-users/zsh-autosuggestions
-https://github.com/peterhurford/up.zsh
-zdharma-continuum/fast-syntax-highlighting kind:defer
-zsh-users/zsh-history-substring-search
-olets/zsh-abbr
-https://github.com/muePatrick/zsh-ai-commands
-redxtech/zsh-kitty
